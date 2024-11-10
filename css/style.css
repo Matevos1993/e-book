@@ -1,0 +1,244 @@
+@import url("./reset.css");
+body {
+  background-color: rgb(33, 0, 45);
+  min-height: 100vh;
+}
+
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(33, 0, 45);
+  width: 100vw;
+  height: 100vh;
+  z-index: 99999;
+  position: fixed;
+  scrollbar-color: unset;
+}
+section #loader-background {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  background: conic-gradient(rgb(33, 0, 45) 0%, rgb(33, 0, 45) 75%, rgb(208, 82, 253) 100%);
+  border-radius: 50%;
+  animation: load 3s infinite linear;
+}
+section #loader-background #loader {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  top: 5px;
+  left: 5px;
+  border-radius: 50%;
+  background-color: rgb(33, 0, 45);
+}
+@keyframes load {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(1080deg);
+  }
+}
+
+nav {
+  position: sticky;
+  background-color: rgb(243, 210, 255);
+  box-shadow: 0 0 20px 0 rgb(151, 0, 206);
+  z-index: 9999;
+  top: 0;
+  padding: 20px 0;
+}
+
+main {
+  padding: 60px 0;
+}
+main #bookContainer {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 40px;
+}
+main #bookContainer .box {
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  height: 300px;
+  border-radius: 8px;
+  box-shadow: 5px 5px 10px 0 rgb(151, 0, 206);
+  transition: 0.5s;
+}
+main #bookContainer .box:hover {
+  transform: scale(1.05);
+}
+main #bookContainer .box .overGround {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(240, 240, 240, 0.3);
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 8px;
+}
+main #bookContainer .box .overGround .titleRow {
+  background-color: rgba(240, 240, 240, 0.85);
+  width: 100%;
+  min-height: 100px;
+}
+main #bookContainer .box .overGround .titleRow h3, main #bookContainer .box .overGround .titleRow p {
+  padding: 12px 8px 0;
+  text-align: center;
+  color: rgb(97, 0, 133);
+  width: 100%;
+}
+main #bookContainer .box .overGround .titleRow p {
+  font-size: 14px;
+}
+main #bookContainer .box .overGround a {
+  background-color: rgba(240, 240, 240, 0.95);
+  width: 100%;
+  padding: 20px 0;
+  text-align: center;
+  border: none;
+  transition: 0.3s;
+  cursor: pointer;
+}
+main #bookContainer .box .overGround a:hover {
+  background-color: rgba(97, 0, 133, 0.95);
+  color: rgb(240, 240, 240);
+}
+main #aboutContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(240, 240, 240);
+}
+main #aboutContainer img {
+  float: right;
+  margin: 0 0 20px 40px;
+  transition: 0.3s;
+}
+main #aboutContainer img:hover {
+  transform: scale(1.1);
+}
+main #aboutContainer .authorRow {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 20px;
+}
+main #aboutContainer .buttonRow {
+  display: flex;
+  gap: 40px;
+  margin-top: 20px;
+}
+main #aboutContainer .buttonRow a {
+  background-color: rgb(243, 210, 255);
+  padding: 5px 20px;
+  border-radius: 30px;
+  border: 2px solid transparent;
+}
+main #aboutContainer .buttonRow a:hover {
+  border: 2px solid rgb(151, 0, 206);
+}
+
+footer {
+  position: sticky;
+  background-color: rgb(243, 210, 255);
+  box-shadow: 0 0 20px 0 rgb(151, 0, 206);
+  z-index: 9999;
+  top: 100vh;
+  padding: 20px 0;
+}
+footer .footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+footer .footer span {
+  position: relative;
+  color: rgb(33, 0, 45);
+  cursor: pointer;
+}
+footer .footer span::after {
+  position: absolute;
+  content: "";
+  width: 60px;
+  height: 60px;
+  background: url("https://profile-images.xing.com/images/e1f158ce77cad30d1092147e15255df4-1/matevos-grigoryan.1024x1024.jpg") no-repeat center center;
+  background-size: cover;
+  top: -20px;
+  right: -80px;
+  border-radius: 50%;
+  transition: 0.2s;
+  opacity: 0;
+  visibility: hidden;
+}
+footer .footer span:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+footer .footer ul {
+  display: flex;
+  gap: 20px;
+}
+footer .footer ul i {
+  font-size: 20px;
+}
+
+@media (max-width: 1280px) {
+  .container {
+    padding: 0 20px;
+  }
+  #bookContainer {
+    gap: 20px !important;
+  }
+}
+@media (max-width: 1150px) {
+  .container {
+    padding: 0 20px;
+  }
+  #bookContainer {
+    grid-template-columns: repeat(5, 1fr) !important;
+  }
+}
+@media (max-width: 1000px) {
+  #bookContainer {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+}
+@media (max-width: 800px) {
+  #bookContainer {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+  #aboutContainer img {
+    float: none !important;
+    margin-left: 0 !important;
+  }
+  #aboutContainer .authorRow {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 4px !important;
+  }
+}
+@media (max-width: 600px) {
+  #bookContainer {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .footer {
+    flex-direction: column;
+    justify-content: center;
+  }
+  .footer span {
+    margin-bottom: 20px;
+  }
+}
+@media (max-width: 400px) {
+  .container {
+    padding: 0 40px !important;
+  }
+  #bookContainer {
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
+}/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,297 @@
+// Variables
+$primary-color: rgb(33, 0, 45);
+$secondary-color: rgb(243, 210, 255);
+$accent-color: rgb(151, 0, 206);
+$text-color: rgb(97, 0, 133);
+$white: rgb(240, 240, 240);
+$loader-accent: rgb(208, 82, 253);
+
+// Mixins
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin sticky-nav {
+  position: sticky;
+  background-color: $secondary-color;
+  box-shadow: 0 0 20px 0 $accent-color;
+  z-index: 9999;
+}
+
+@mixin hover-scale {
+  transition: 0.3s;
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+@import url("./reset.css");
+
+body {
+  background-color: $primary-color;
+  min-height: 100vh;
+}
+
+section {
+  @include flex-center;
+  background-color: $primary-color;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99999;
+  position: fixed;
+  scrollbar-color: unset;
+  
+  #loader-background {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    background: conic-gradient(
+      $primary-color 0%,
+      $primary-color 75%,
+      $loader-accent 100%
+    );
+    border-radius: 50%;
+    animation: load 3s infinite linear;
+    
+    #loader {
+      position: absolute;
+      width: 70px;
+      height: 70px;
+      top: 5px;
+      left: 5px;
+      border-radius: 50%;
+      background-color: $primary-color;
+    }
+  }
+  
+  @keyframes load {
+    0% { transform: rotate(0); }
+    100% { transform: rotate(1080deg); }
+  }
+}
+
+nav {
+  @include sticky-nav;
+  top: 0;
+  padding: 20px 0;
+}
+
+main {
+  padding: 60px 0;
+  
+  #bookContainer {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 40px;
+    
+    .box {
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      height: 300px;
+      border-radius: 8px;
+      box-shadow: 5px 5px 10px 0 $accent-color;
+      transition: 0.5s;
+      
+      &:hover {
+        transform: scale(1.05);
+      }
+      
+      .overGround {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        background-color: rgba($white, 0.3);
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        border-radius: 8px;
+        
+        .titleRow {
+          background-color: rgba($white, 0.85);
+          width: 100%;
+          min-height: 100px;
+          
+          h3, p {
+            padding: 12px 8px 0;
+            text-align: center;
+            color: $text-color;
+            width: 100%;
+          }
+          
+          p {
+            font-size: 14px;
+          }
+        }
+        
+        a {
+          background-color: rgba($white, 0.95);
+          width: 100%;
+          padding: 20px 0;
+          text-align: center;
+          border: none;
+          transition: 0.3s;
+          cursor: pointer;
+          
+          &:hover {
+            background-color: rgba($text-color, 0.95);
+            color: $white;
+          }
+        }
+      }
+    }
+  }
+  
+  #aboutContainer {
+    @include flex-center;
+    color: $white;
+    
+    img {
+      float: right;
+      margin: 0 0 20px 40px;
+      @include hover-scale;
+    }
+    
+    .authorRow {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      margin-bottom: 20px;
+    }
+    
+    .buttonRow {
+      display: flex;
+      gap: 40px;
+      margin-top: 20px;
+      
+      a {
+        background-color: $secondary-color;
+        padding: 5px 20px;
+        border-radius: 30px;
+        border: 2px solid transparent;
+        
+        &:hover {
+          border: 2px solid $accent-color;
+        }
+      }
+    }
+  }
+}
+
+footer {
+  @include sticky-nav;
+  top: 100vh;
+  padding: 20px 0;
+  
+  .footer {
+    @include flex-between;
+    
+    span {
+      position: relative;
+      color: $primary-color;
+      cursor: pointer;
+      
+      &::after {
+        position: absolute;
+        content: "";
+        width: 60px;
+        height: 60px;
+        background: url("https://profile-images.xing.com/images/e1f158ce77cad30d1092147e15255df4-1/matevos-grigoryan.1024x1024.jpg")
+          no-repeat center center;
+        background-size: cover;
+        top: -20px;
+        right: -80px;
+        border-radius: 50%;
+        transition: 0.2s;
+        opacity: 0;
+        visibility: hidden;
+      }
+      
+      &:hover::after {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+    
+    ul {
+      display: flex;
+      gap: 20px;
+      
+      i {
+        font-size: 20px;
+      }
+    }
+  }
+}
+
+@media (max-width: 1280px) {
+  .container {
+    padding: 0 20px;
+  }
+  #bookContainer {
+    gap: 20px !important;
+  }
+}
+
+@media (max-width: 1150px) {
+  .container {
+    padding: 0 20px;
+  }
+  #bookContainer {
+    grid-template-columns: repeat(5, 1fr) !important;
+  }
+}
+
+@media (max-width: 1000px) {
+  #bookContainer {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+}
+
+@media (max-width: 800px) {
+  #bookContainer {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+  #aboutContainer {
+    img {
+      float: none !important;
+      margin-left: 0 !important;
+    }
+    .authorRow {
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      gap: 4px !important;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  #bookContainer {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .footer {
+    flex-direction: column;
+    justify-content: center;
+    span {
+      margin-bottom: 20px;
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .container {
+    padding: 0 40px !important;
+  }
+  #bookContainer {
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
+}
